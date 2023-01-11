@@ -11,7 +11,7 @@ export interface FormElement {
   required: boolean;
   type: "text" | "select";
   style: ElementStyle;
-  defaultValue?: string | number;
+  defaultValue: string | number;
   children: FormElement[];
   options?: string[];
 }

@@ -55,6 +55,7 @@ export const FormExample1: FormModel = {
           paddingLeft: 16,
           paddingRight: 16,
         },
+        defaultValue: 0,
         placeholder: "Enter your age",
         children: [],
         required: true,
