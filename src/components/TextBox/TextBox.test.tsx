@@ -5,7 +5,7 @@ import configureStore from "redux-mock-store";
 import TextBox from "components/TextBox";
 
 const setup = () => {
-  const initialState = { fields: { TextBoxTest: "" } };
+  const initialState = { fields: { TextBoxTest: "", ChildBox: "" } };
   const mockStore = configureStore();
   let store = mockStore(initialState);
 
@@ -15,7 +15,26 @@ const setup = () => {
         name="TextBoxTest"
         defaultValue="Default"
         style={{ width: "100%" }}
-        children={[]}
+        children={[
+          {
+            name: "ChildBox",
+            label: "Gender",
+            type: "select",
+            style: {
+              width: 400,
+              margin: 16,
+              borderRadius: 4,
+              paddingTop: 8,
+              paddingBottom: 8,
+              paddingLeft: 16,
+              paddingRight: 16,
+            },
+            defaultValue: "Male",
+            options: ["Female", "Male", "Other"],
+            children: [],
+            required: true,
+          },
+        ]}
         placeholder="Text Box Test"
         required={true}
         label="Text Box Test"
@@ -24,8 +43,11 @@ const setup = () => {
     </Provider>
   );
   const input = utils.getByLabelText("TextBoxTest");
+  const child = utils.getByLabelText("ChildBox");
+
   return {
     input,
+    child,
     store,
     ...utils,
   };
@@ -50,13 +72,22 @@ test("Test change value", () => {
   const castedInput = input as HTMLInputElement;
 
   const actions = store.getActions();
-  const initPayload = {
-    payload: {
-      name: "TextBoxTest",
-      value: "Default",
+  const initPayload = [
+    {
+      payload: {
+        name: "ChildBox",
+        value: "Male",
+      },
+      type: "forms/setField",
     },
-    type: "forms/setField",
-  };
+    {
+      payload: {
+        name: "TextBoxTest",
+        value: "Default",
+      },
+      type: "forms/setField",
+    },
+  ];
   const changePayload = {
     payload: {
       name: "TextBoxTest",
@@ -65,9 +96,16 @@ test("Test change value", () => {
     type: "forms/setField",
   };
 
-  expect(actions).toEqual([initPayload]);
+  expect(actions).toEqual(initPayload);
   fireEvent.change(castedInput, { target: { value: "new value" } });
 
   expect(castedInput.value).toBe("new value");
-  expect(actions).toEqual([initPayload, changePayload]);
+  expect(actions).toEqual([...initPayload, changePayload]);
+});
+
+test("Render child", () => {
+  const { child } = setup();
+  const castedInput = child as HTMLInputElement;
+
+  expect(castedInput).toBeInTheDocument();
 });

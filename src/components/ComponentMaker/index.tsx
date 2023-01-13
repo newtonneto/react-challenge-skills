@@ -1,4 +1,4 @@
-import { createElement } from "react";
+import { createElement, Fragment } from "react";
 
 import { FormElement } from "interfaces/form-model";
 import ComboBox from "components/ComboBox";
@@ -14,6 +14,8 @@ const FormInputs: IHash = {
 };
 
 const ComponentMaker = (props: FormElement) => {
+  if (!FormInputs[props.type]) return <Fragment />;
+
   return createElement(FormInputs[props.type], { ...props });
 };
 

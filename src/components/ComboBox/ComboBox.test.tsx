@@ -5,7 +5,7 @@ import configureStore from "redux-mock-store";
 import ComboBox from "components/ComboBox";
 
 const setup = () => {
-  const initialState = { fields: { TextBoxTest: "" } };
+  const initialState = { fields: { TextBoxTest: "", ChildBox: "" } };
   const mockStore = configureStore();
   let store = mockStore(initialState);
 
@@ -15,7 +15,28 @@ const setup = () => {
         name="ComboBoxTest"
         defaultValue="Option 1"
         style={{ width: "100%" }}
-        children={[]}
+        children={[
+          {
+            name: "ChildBox",
+            label: "Steam Profile",
+            type: "text",
+            style: {
+              width: 400,
+              margin: 16,
+              borderRadius: 4,
+              paddingTop: 8,
+              paddingBottom: 8,
+              paddingLeft: 16,
+              paddingRight: 16,
+              borderColor: "red",
+              borderWidth: 5,
+            },
+            defaultValue: "",
+            placeholder: "Enter your Steam Profile",
+            children: [],
+            required: true,
+          },
+        ]}
         required={true}
         label="Combo Box Test"
         type="select"
@@ -24,8 +45,11 @@ const setup = () => {
     </Provider>
   );
   const input = utils.getByLabelText("ComboBoxTest");
+  const child = utils.getByLabelText("ChildBox");
+
   return {
     input,
+    child,
     store,
     ...utils,
   };
@@ -70,4 +94,11 @@ test("Test change value", () => {
 
   expect(castedInput.value).toBe("Option 2");
   expect(actions).toEqual([initPayload, changePayload]);
+});
+
+test("Render child", () => {
+  const { child } = setup();
+  const castedInput = child as HTMLInputElement;
+
+  expect(castedInput).toBeInTheDocument();
 });
