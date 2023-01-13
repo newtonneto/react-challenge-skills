@@ -1,6 +1,7 @@
 import { Fragment, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import cloneDeep from "lodash/cloneDeep";
+import { toast, ToastContainer } from "react-toastify";
 
 import DataLoader from "components/DataLoader";
 import ComponentMaker from "components/ComponentMaker";
@@ -37,10 +38,15 @@ const WorkspaceComponent = () => {
     replaceValues(values, clone.root);
 
     dispatch(addForm(clone));
+
+    toast.success("Success Notification !", {
+      position: toast.POSITION.TOP_CENTER,
+    });
   };
 
   return (
     <Fragment>
+      <ToastContainer />
       {!form ? (
         <DataLoader />
       ) : (
