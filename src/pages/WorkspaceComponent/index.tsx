@@ -10,6 +10,7 @@ import { addFields, addForm, getFields, getFormByName } from "store/slice";
 import { IStoreFields } from "interfaces/generic-hash";
 import findFields from "utils/findFields";
 import replaceValues from "utils/replaceValues";
+import { postByName } from "data/api";
 
 const WorkspaceComponent = () => {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ const WorkspaceComponent = () => {
     replaceValues(values, clone.root);
 
     dispatch(addForm(clone));
+    postByName(clone);
 
     toast.success("Success Notification !", {
       position: toast.POSITION.TOP_CENTER,

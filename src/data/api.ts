@@ -104,3 +104,33 @@ export const FormExample1: FormModel = {
     ],
   },
 };
+
+export const getByName = (formName: string) => {
+  return localStorage.getItem(formName);
+};
+
+export const getAll = () => {
+  let keys: string[] = [];
+  let forms: FormModel[] = [];
+
+  keys = Object.keys(localStorage);
+  keys.forEach((key) => {
+    const form = localStorage.getItem(key);
+
+    if (form) {
+      forms.push(JSON.parse(form));
+    }
+  });
+
+  return forms;
+};
+
+export const postByName = (form: FormModel) => {
+  localStorage.setItem(form.name, JSON.stringify(form));
+};
+
+export const initializeFakeApi = () => {
+  if (!getByName(FormExample1.name)) {
+    postByName(FormExample1);
+  }
+};
