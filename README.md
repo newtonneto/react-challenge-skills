@@ -55,7 +55,7 @@ The JSON struture is divided in three parts, the main level, the components defi
 ```
 
 - name: a string that identifies the component;
-- label: a string to identifies the component visually;
+- label: a string to identify the component visually;
 - placeholder: optional property to explain the field;
 - required: define if that input is mandatory or not for submit;
 - type: defines what component will be rendered;
@@ -99,7 +99,7 @@ A group of html style elements to customize the form or a component
 
 - WorkspaceComponents [src/pages]
 
-  Handle form initial values and form submit, calls ComponentMaker to create the entire form from the JSON's root property. Contains a reference to DataLoader, to deal with cases where the user refreshes the page and redux loses the states in store.
+  Handle the form's initial values and submit, calls ComponentMaker to create the entire form from the JSON's root property. Contains a reference to DataLoader, to deal with cases where the user refreshes the page and redux loses the states in store.
 
 - DataLoader [src/components]
 
@@ -107,12 +107,12 @@ A group of html style elements to customize the form or a component
 
 - ComponentMaker [src/components]
 
-  Has the logic to build the components defined on JSON selected form. The ComponentMaker build one component at, if the builded component has children components he will call the ComponentMaker to build his children, and so on.
+  Contains the logic to build the components defined on JSON selected form. The ComponentMaker creates one component at time, if the created component has children components it will call the ComponentMaker to build its children, and so on.
 
 - Store [src/store/]
 
-  Responsible for store all the forms on JSON format and all field's values of the selected form. The store slice has functions to retrieve the forms or fields by it's names and to get all forms or fields in one object. functions to get individual elements is useful to render the selected form and to update only the updated field on input vlaue changes cases.
+  It is responsible for storing all the forms on JSON format and all field inputs values of the selected form. The Store's Slice has functions to retrieve the forms or fields by its names and to get all forms or fields in one object. Functions to get individual elements are useful to render the selected form and to update only the updated field on input value changes cases.
 
 - Api [src/data]
 
-  Handle logic to store e retrieve data from local storage. Local storage simulates an API to provide data to this front end.
+  Handles the logic to store and retrieve data from local storage. Local storage simulates an API to provide data to this project's front end.
