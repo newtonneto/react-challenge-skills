@@ -44,25 +44,37 @@ The JSON struture is divided in three parts, the main level, the components defi
   {
     name: string;
     label: string;
-    placeholder?: string;
-    required: boolean;
     type: "text" | "select";
-    style: ElementStyle;
-    defaultValue: string | number;
     children: FormElement[];
     options?: string[];
+    properties: ElementProperties;
+    style?: ElementStyle;
   }
 ```
 
 - name: a string that identifies the component;
 - label: a string to identify the component visually;
-- placeholder: optional property to explain the field;
-- required: define if that input is mandatory or not for submit;
 - type: defines what component will be rendered;
-- style: style object with properties to customize the component;
-- defaultValue: the first value of the input;
 - children: an array of FormElements;
 - options: optional property that contains a string array to create the select input options.
+- properties: an object with input properties;
+- style: style object with properties to customize the component;
+
+## ElementProperties
+
+```sh
+  {
+    placeholder?: string;
+    style: ElementStyle;
+    defaultValue: string | number;
+    required?: boolean;
+  }
+```
+
+- placeholder: optional property to explain the field;
+- style: style object with properties to customize the input field;
+- defaultValue: the first value of the input;
+- required: define if that input is mandatory or not for submit;
 
 ## ElementStyle
 
