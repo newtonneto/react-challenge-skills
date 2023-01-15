@@ -111,4 +111,8 @@ A group of html style elements to customize the form or a component
 
 - Store [src/store/]
 
-  Resposible for store all the forms on JSON format and all field's values of selected form. The store slice has functions to retrieve the forms or fields by your names and to get all forms or fields in one object. functions to get individual elements is useful to render the selected form and to update only the updated field on input vlaue changes cases.
+  Responsible for store all the forms on JSON format and all field's values of the selected form. The store slice has functions to retrieve the forms or fields by it's names and to get all forms or fields in one object. functions to get individual elements is useful to render the selected form and to update only the updated field on input vlaue changes cases.
+
+- Api [src/data]
+
+  Handle logic to store e retrieve data from local storage. Local storage simulates an API to provide data to this front end.
