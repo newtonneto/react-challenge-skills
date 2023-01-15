@@ -3,42 +3,48 @@ import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 
 import TextBox from "components/TextBox";
+import { ElementProperties } from "interfaces/form-model";
 
 const setup = () => {
   const initialState = { fields: { TextBoxTest: "", ChildBox: "" } };
   const mockStore = configureStore();
   let store = mockStore(initialState);
+  const properties: ElementProperties = {
+    defaultValue: "Default",
+    style: { width: "100%" },
+    placeholder: "Text Box Test",
+    required: true,
+  };
 
   const utils = render(
     <Provider store={store}>
       <TextBox
         name="TextBoxTest"
-        defaultValue="Default"
-        style={{ width: "100%" }}
+        label="Text Box Test"
+        type="text"
+        properties={properties}
         children={[
           {
             name: "ChildBox",
             label: "Gender",
             type: "select",
-            style: {
-              width: 400,
-              margin: 16,
-              borderRadius: 4,
-              paddingTop: 8,
-              paddingBottom: 8,
-              paddingLeft: 16,
-              paddingRight: 16,
+            properties: {
+              style: {
+                width: 400,
+                margin: 16,
+                borderRadius: 4,
+                paddingTop: 8,
+                paddingBottom: 8,
+                paddingLeft: 16,
+                paddingRight: 16,
+              },
+              defaultValue: "Male",
+              required: true,
             },
-            defaultValue: "Male",
             options: ["Female", "Male", "Other"],
             children: [],
-            required: true,
           },
         ]}
-        placeholder="Text Box Test"
-        required={true}
-        label="Text Box Test"
-        type="text"
       />
     </Provider>
   );

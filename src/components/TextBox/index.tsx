@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useCallback } from "react";
 
 import { FormElement } from "interfaces/form-model";
 import ComponentMaker from "components/ComponentMaker";
@@ -6,33 +6,32 @@ import { useDispatch } from "store";
 import { setField } from "store/slice";
 
 const TextBox = (props: FormElement) => {
-  const { name, defaultValue, style, children, placeholder, required, label } =
-    props;
+  const { name, children, label, properties, style } = props;
   const dispatch = useDispatch();
 
-  const handleFieldUpdate = (value: string | number) => {
-    dispatch(setField({ name, value }));
-  };
+  const handleFieldUpdate = useCallback(
+    (value: string | number) => {
+      dispatch(setField({ name, value }));
+    },
+    [dispatch, name]
+  );
 
   useEffect(() => {
-    if (defaultValue) {
-      handleFieldUpdate(defaultValue);
+    if (properties.defaultValue) {
+      handleFieldUpdate(properties.defaultValue);
     }
-  }, []);
+  }, [properties.defaultValue, handleFieldUpdate]);
 
   return (
     <Fragment>
-      <label htmlFor={label}>
+      <label htmlFor={label} style={style}>
         {label}
         <input
           type="text"
           name={name}
           aria-label={name}
-          style={style}
-          placeholder={placeholder}
-          defaultValue={defaultValue}
-          required={required}
           onChange={(e) => handleFieldUpdate(e.target.value)}
+          {...properties}
         />
       </label>
       {children.length > 0 &&

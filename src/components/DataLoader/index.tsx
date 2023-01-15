@@ -13,7 +13,7 @@ const DataLoader = () => {
     forms.forEach((form) => {
       dispatch(addForm(form));
     });
-  }, []);
+  }, [dispatch]);
 
   return <Fragment />;
 };

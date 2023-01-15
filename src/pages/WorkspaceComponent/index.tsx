@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import cloneDeep from "lodash/cloneDeep";
 import { toast, ToastContainer } from "react-toastify";
@@ -11,6 +11,7 @@ import { IStoreFields } from "interfaces/generic-hash";
 import findFields from "utils/findFields";
 import replaceValues from "utils/replaceValues";
 import { postByName } from "data/api";
+import Button from "components/Button";
 
 const WorkspaceComponent = () => {
   const navigate = useNavigate();
@@ -20,28 +21,32 @@ const WorkspaceComponent = () => {
   const form = useSelector((state) => getFormByName(state, formName));
   const values = useSelector((state) => getFields(state));
 
-  const handleFormFields = () => {
+  const handleFormFields = useCallback(() => {
     let fields: IStoreFields = {};
-    findFields(fields, form.root);
+    form.root.forEach((input) => {
+      findFields(fields, input);
+    });
     dispatch(addFields(fields));
-  };
+  }, [dispatch, form]);
 
   useEffect(() => {
     if (form) {
       handleFormFields();
     }
-  }, [form]);
+  }, [form, handleFormFields]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     let clone = cloneDeep(form);
-    replaceValues(values, clone.root);
+    clone.root.forEach((input) => {
+      replaceValues(values, input);
+    });
 
     dispatch(addForm(clone));
     postByName(clone);
 
-    toast.success("Success Notification !", {
+    toast.success("Form submitted!", {
       position: toast.POSITION.TOP_CENTER,
     });
   };
@@ -54,20 +59,32 @@ const WorkspaceComponent = () => {
       ) : (
         <Fragment>
           <form onSubmit={handleSubmit} style={form.style} name={form.name}>
-            <ComponentMaker {...form.root} />
+            {form.root.map((input) => (
+              <ComponentMaker {...input} />
+            ))}
 
-            <input
-              type="submit"
-              value="Submit"
-              style={{ width: 200, height: 40, marginTop: 8, marginLeft: 16 }}
-            />
+            <div>
+              <input
+                type="submit"
+                value="Submit"
+                style={{
+                  width: 200,
+                  height: 40,
+                  marginTop: 8,
+                  marginLeft: 16,
+                  backgroundColor: "white",
+                  borderRadius: 4,
+                  borderColor: "green",
+                  color: "green",
+                }}
+              />
+              <Button
+                value="Voltar"
+                color="red"
+                onClick={() => navigate("/")}
+              />
+            </div>
           </form>
-          <input
-            type="submit"
-            value="Voltar"
-            style={{ width: 200, height: 40, marginTop: 8, marginLeft: 16 }}
-            onClick={() => navigate("/")}
-          />
         </Fragment>
       )}
     </Fragment>

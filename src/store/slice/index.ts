@@ -30,6 +30,9 @@ const selectors = {
   getFormByName: (state: RootState, name: string) => {
     return state.forms[name];
   },
+  getFormNames: (state: RootState) => {
+    return Object.keys(state.forms);
+  },
   getFields: (state: RootState) => {
     return state.fields;
   },
@@ -39,6 +42,7 @@ const selectors = {
 };
 
 export const { addForm, addFields, setField } = slice.actions;
-export const { getAllForms, getFormByName, getFields, getField } = selectors;
+export const { getAllForms, getFormByName, getFormNames, getFields, getField } =
+  selectors;
 
 export default slice.reducer;

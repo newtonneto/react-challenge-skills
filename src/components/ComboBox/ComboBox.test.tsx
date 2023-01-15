@@ -3,44 +3,50 @@ import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 
 import ComboBox from "components/ComboBox";
+import { ElementProperties } from "interfaces/form-model";
 
 const setup = () => {
   const initialState = { fields: { TextBoxTest: "", ChildBox: "" } };
   const mockStore = configureStore();
   let store = mockStore(initialState);
+  const properties: ElementProperties = {
+    defaultValue: "Option 1",
+    style: { width: "100%" },
+    required: true,
+  };
 
   const utils = render(
     <Provider store={store}>
       <ComboBox
         name="ComboBoxTest"
-        defaultValue="Option 1"
-        style={{ width: "100%" }}
+        label="Combo Box Test"
+        type="select"
+        options={["Option 1", "Option 2"]}
+        properties={properties}
         children={[
           {
             name: "ChildBox",
             label: "Steam Profile",
             type: "text",
-            style: {
-              width: 400,
-              margin: 16,
-              borderRadius: 4,
-              paddingTop: 8,
-              paddingBottom: 8,
-              paddingLeft: 16,
-              paddingRight: 16,
-              borderColor: "red",
-              borderWidth: 5,
+            properties: {
+              style: {
+                width: 400,
+                margin: 16,
+                borderRadius: 4,
+                paddingTop: 8,
+                paddingBottom: 8,
+                paddingLeft: 16,
+                paddingRight: 16,
+                borderColor: "red",
+                borderWidth: 5,
+              },
+              defaultValue: "",
+              placeholder: "Enter your Steam Profile",
+              required: true,
             },
-            defaultValue: "",
-            placeholder: "Enter your Steam Profile",
             children: [],
-            required: true,
           },
         ]}
-        required={true}
-        label="Combo Box Test"
-        type="select"
-        options={["Option 1", "Option 2"]}
       />
     </Provider>
   );

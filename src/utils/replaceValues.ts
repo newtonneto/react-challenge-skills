@@ -6,7 +6,7 @@ const replaceValues = (
   formElement: FormElement
 ): void => {
   if (fields[formElement.name]) {
-    formElement.defaultValue = fields[formElement.name];
+    formElement.properties.defaultValue = fields[formElement.name];
   }
 
   if (formElement.children) {

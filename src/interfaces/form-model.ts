@@ -1,19 +1,24 @@
 export interface FormModel {
   name: string;
-  root: FormElement;
+  root: FormElement[];
   style: ElementStyle;
 }
 
 export interface FormElement {
   name: string;
   label: string;
-  placeholder?: string;
-  required: boolean;
   type: "text" | "select";
-  style: ElementStyle;
-  defaultValue: string | number;
   children: FormElement[];
   options?: string[];
+  properties: ElementProperties;
+  style?: ElementStyle;
+}
+
+export interface ElementProperties {
+  placeholder?: string;
+  style: ElementStyle;
+  defaultValue: string | number;
+  required?: boolean;
 }
 
 export interface ElementStyle {

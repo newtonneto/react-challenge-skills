@@ -1,7 +1,12 @@
+import Button from "components/Button";
 import { useNavigate } from "react-router-dom";
+
+import { useSelector } from "store";
+import { getFormNames } from "store/slice";
 
 const Main = () => {
   const navigate = useNavigate();
+  const forms = useSelector((state) => getFormNames(state));
 
   const handleNavigation = (form: string) => {
     navigate("/form", {
@@ -14,10 +19,14 @@ const Main = () => {
   return (
     <div>
       <h1>Main</h1>
-      <button onClick={() => handleNavigation("form_1")}>HTML Form</button>
-      <button onClick={() => handleNavigation("form_1")}>
-        React Hook Form
-      </button>
+      {forms.map((form, index) => (
+        <Button
+          key={index}
+          color="green"
+          value={form}
+          onClick={() => handleNavigation(form)}
+        />
+      ))}
     </div>
   );
 };
