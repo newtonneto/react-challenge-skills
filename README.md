@@ -29,13 +29,13 @@ The JSON struture is divided in three parts, the main level, the components defi
 ```sh
   {
     name: string;
-    root: FormElement;
+    root: FormElement[];
     style: ElementStyle;
   }
 ```
 
 - name: a string that identifies the form;
-- root: the first component, at the top level of the structure;
+- root: an array with the first components, at the top level of the JSON's structure;
 - style: style object with properties to customize the form.
 
 ## FormElement:
