@@ -14,7 +14,11 @@ export const getAll = () => {
     const form = localStorage.getItem(key);
 
     if (form) {
-      forms.push(JSON.parse(form));
+      try {
+        forms.push(JSON.parse(form));
+      } catch (error) {
+        console.error(error);
+      }
     }
   });
 

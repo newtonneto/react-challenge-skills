@@ -4,13 +4,6 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.11",
-    "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.10",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -18,8 +11,12 @@
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
+    "web-vitals": "^2.1.4",
     "typescript": "^4.9.4",
-    "web-vitals": "^2.1.4"
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "redux-mock-store": "^1.5.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -47,8 +44,11 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.11",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
     "@types/lodash": "^4.14.191",
-    "@types/redux-mock-store": "^1.0.3",
-    "redux-mock-store": "^1.5.4"
+    "@types/redux-mock-store": "^1.0.3"
   }
 }

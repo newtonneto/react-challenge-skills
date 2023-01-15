@@ -59,8 +59,8 @@ const WorkspaceComponent = () => {
       ) : (
         <Fragment>
           <form onSubmit={handleSubmit} style={form.style} name={form.name}>
-            {form.root.map((input) => (
-              <ComponentMaker {...input} />
+            {form.root.map((input, index) => (
+              <ComponentMaker key={index} {...input} />
             ))}
 
             <div>
